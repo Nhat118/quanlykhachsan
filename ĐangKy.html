@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="images/download.png">
+  <title>Đăng ký</title>
+  <link rel="stylesheet" href="styles/DangKy.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Đăng ký</h2>
+    <form id="registerForm">
+      <div class="input-group">
+        <label for="fullName">Họ và tên</label>
+        <input type="text" id="fullName" name="fullName" placeholder="Nhập họ và tên" required>
+      </div>
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Nhập email" required>
+      </div>
+      <div class="input-group">
+        <label for="password">Mật khẩu</label>
+        <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required>
+      </div>
+      <button type="button" class="btn" onclick="register()">Đăng ký</button>
+      <p class="message" id="message"></p>
+    </form>
+  </div>
+
+
+  <script>
+    async function register() {
+      // Lấy thông tin từ form
+      const fullName = document.getElementById('fullName').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      // Hiển thị thông báo chờ
+      const messageElement = document.getElementById('message');
+      messageElement.textContent = "Đang xử lý...";
+      messageElement.classList.remove('success');
+      messageElement.classList.remove('error');
+
+      try {
+        // Gửi yêu cầu tới API backend
+        const response = await fetch('http://127.0.0.1:3000/api/auth/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ fullName, email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          messageElement.textContent = data.message || "Đăng ký thành công!";
+          messageElement.classList.add('success');
+        } else {
+          messageElement.textContent = data.error || "Có lỗi xảy ra, vui lòng thử lại!";
+          messageElement.classList.add('error');
+        }
+      } catch (error) {
+        messageElement.textContent = "Lỗi kết nối đến server!";
+        messageElement.classList.add('error');
+        console.error("Error:", error);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Phòng - Luxury Hotel</title>
+    <link rel="stylesheet" href="styles/QuanLyPhong.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <img src="images/logo.png" alt="Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li class="active"><i class="fas fa-bed"></i> Quản lý phòng</li>
+                    <li><i class="fas fa-users"></i> Quản lý đặt phòng</li>
+                    <li><i class="fas fa-cog"></i> Cài đặt</li>
+                    <li id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Đăng xuất</li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h1>Quản Lý Phòng</h1>
+                <button id="addRoomBtn" class="add-room-btn">
+                    <i class="fas fa-plus"></i> Thêm Phòng Mới
+                </button>
+            </div>
+
+            <!-- Room List -->
+            <div class="room-list">
+                <!-- Room cards will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Room Modal -->
+    <div id="roomModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle">Thêm Phòng Mới</h2>
+            <form id="roomForm">
+                <div class="form-group">
+                    <label for="roomType">Loại phòng:</label>
+                    <select id="roomType" required>
+                        <option value="single">Phòng Đơn</option>
+                        <option value="double">Phòng Đôi</option>
+                        <option value="family">Phòng Gia Đình</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="roomNumber">Số phòng:</label>
+                    <input type="text" id="roomNumber" required>
+                </div>
+                <div class="form-group">
+                    <label for="price">Giá (VNĐ/đêm):</label>
+                    <input type="number" id="price" required>
+                </div>
+                <div class="form-group">
+                    <label for="roomImage">Hình ảnh phòng:</label>
+                    <input type="file" id="roomImage" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label for="description">Mô tả:</label>
+                    <textarea id="description" required></textarea>
+                </div>
+                <div class="form-group amenities">
+                    <label>Tiện nghi:</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" value="wifi"> Wifi</label>
+                        <label><input type="checkbox" value="tv"> TV</label>
+                        <label><input type="checkbox" value="ac"> Điều hòa</label>
+                        <label><input type="checkbox" value="bathroom"> Phòng tắm riêng</label>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">Lưu</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Thêm dữ liệu mẫu
+        let sampleRooms = [
+            {
+                id: 'R001',
+                type: 'Phòng Đơn',
+                number: '101',
+                price: 500000,
+                description: 'Phòng đơn tiện nghi, view đẹp',
+                image: 'images/single-room.jpg',
+                amenities: ['wifi', 'tv', 'ac', 'bathroom']
+            },
+            {
+                id: 'R002',
+                type: 'Phòng Đôi',
+                number: '201',
+                price: 800000,
+                description: 'Phòng đôi rộng rãi, thích hợp cho cặp đôi',
+                image: 'images/double-room.jpg',
+                amenities: ['wifi', 'tv', 'ac', 'bathroom']
+            }
+        ];
+
+        // Kiểm tra đăng nhập
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('userToken');
+            const userRole = localStorage.getItem('userRole');
+            
+            if (!token || userRole !== 'admin') {
+                alert('Bạn không có quyền truy cập trang này!');
+                window.location.href = 'DangNhap.html';
+                return;
+            }
+
+            displayRooms();
+        });
+
+        // Xử lý đăng xuất
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            localStorage.removeItem('userToken');
+            window.location.href = 'DangNhap.html';
+        });
+
+        // Hiển thị modal thêm phòng
+        const modal = document.getElementById('roomModal');
+        const addRoomBtn = document.getElementById('addRoomBtn');
+        const closeBtn = document.getElementsByClassName('close')[0];
+
+        addRoomBtn.onclick = function() {
+            modal.style.display = "block";
+            document.getElementById('roomForm').reset();
+        }
+
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Xử lý form thêm phòng
+        document.getElementById('roomForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                type: document.getElementById('roomType').value,
+                number: document.getElementById('roomNumber').value,
+                price: parseInt(document.getElementById('price').value),
+                description: document.getElementById('description').value,
+                amenities: Array.from(document.querySelectorAll('.amenities input:checked')).map(cb => cb.value),
+                image: 'images/default-room.jpg'
+            };
+
+            const roomId = this.dataset.roomId;
+            if (roomId) {
+                // Cập nhật phòng hi�n có
+                const index = sampleRooms.findIndex(r => r.id === roomId);
+                if (index !== -1) {
+                    sampleRooms[index] = { ...sampleRooms[index], ...formData };
+                    alert('Cập nhật phòng thành công!');
+                }
+            } else {
+                // Thêm phòng mới
+                formData.id = 'R' + (sampleRooms.length + 1).toString().padStart(3, '0');
+                sampleRooms.push(formData);
+                alert('Thêm phòng mới thành công!');
+            }
+
+            // Reset form và đóng modal
+            this.reset();
+            delete this.dataset.roomId;
+            document.getElementById('modalTitle').textContent = 'Thêm Phòng Mới';
+            modal.style.display = "none";
+            
+            // Cập nhật danh sách phòng và lưu vào localStorage
+            displayRooms();
+        });
+
+        // Hiển thị danh sách phòng
+        function displayRooms(rooms = sampleRooms) {
+            localStorage.setItem('rooms', JSON.stringify(rooms));
+            const roomList = document.querySelector('.room-list');
+            roomList.innerHTML = '';
+
+            rooms.forEach(room => {
+                const roomCard = document.createElement('div');
+                roomCard.className = 'room-card';
+                roomCard.innerHTML = `
+                    <div class="room-image">
+                        <img src="${room.image || 'images/default-room.jpg'}" alt="${room.type}">
+                    </div>
+                    <div class="room-info">
+                        <h3>${room.type} - ${room.number}</h3>
+                        <p>${room.description}</p>
+                        <div class="price">${room.price.toLocaleString()} VNĐ/đêm</div>
+                        <div class="amenities-list">
+                            ${room.amenities.map(amenity => `<span><i class="fas fa-check"></i> ${amenity}</span>`).join('')}
+                        </div>
+                        <div class="actions">
+                            <button class="edit-btn" onclick="editRoom('${room.id}')">
+                                <i class="fas fa-edit"></i> Sửa
+                            </button>
+                            <button class="delete-btn" onclick="deleteRoom('${room.id}')">
+                                <i class="fas fa-trash"></i> Xóa
+                            </button>
+                        </div>
+                    </div>
+                `;
+                roomList.appendChild(roomCard);
+            });
+        }
+
+        // Chỉnh sửa phòng
+        function editRoom(roomId) {
+            const room = sampleRooms.find(r => r.id === roomId);
+            if (room) {
+                // Điền thông tin vào form
+                document.getElementById('modalTitle').textContent = 'Chỉnh Sửa Phòng';
+                document.getElementById('roomType').value = room.type.toLowerCase().replace(' ', '');
+                document.getElementById('roomNumber').value = room.number;
+                document.getElementById('price').value = room.price;
+                document.getElementById('description').value = room.description;
+                
+                // Checked các amenities
+                const amenityCheckboxes = document.querySelectorAll('.amenities input[type="checkbox"]');
+                amenityCheckboxes.forEach(checkbox => {
+                    checkbox.checked = room.amenities.includes(checkbox.value);
+                });
+
+                // Thêm room ID vào form
+                const form = document.getElementById('roomForm');
+                form.dataset.roomId = roomId;
+
+                // Hiển thị modal
+                modal.style.display = "block";
+            }
+        }
+
+        // Xóa phòng
+        function deleteRoom(roomId) {
+            if (confirm('Bạn có chắc muốn xóa phòng này?')) {
+                sampleRooms = sampleRooms.filter(room => room.id !== roomId);
+                displayRooms();
+                alert('Đã xóa phòng thành công!');
+            }
+        }
+
+        const account = {
+            username: "admin",
+            // Mật khẩu "123" đã được hash
+            password: "$2a$10$IhMWPzGMqr8CzHZhdvj/L.yM1qXQKGqXYyKJ9.1Y8cJ2tP4.pbTMi",
+            email: "admin@gmail.com",
+            role: "admin"
+        }
+    </script>
+</body>
+</html> 

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/download.png">
+    <title>Danh sách phòng - Luxury Hotel</title>
+    <link rel="stylesheet" href="styles/DatPhong.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header">
+            <div class="logo">
+                <a href="TrangChu.html">
+                    <img src="images/logo.png" alt="Logo Hotel">
+                </a>
+            </div>
+            <nav>
+                <ul class="menu">
+                    <li><a href="TrangChu.html">Trang Chủ</a></li>
+                    <li><a href="DatPhong.html" class="active">Đặt Phòng</a></li>
+                    <li><a href="DichVu.html">Dịch Vụ</a></li>
+                    <li><a href="VeChungToi.html">Về Chúng Tôi</a></li>
+                    <li><a href="LienHe.html">Liên Hệ</a></li>
+                    <li><a href="DangNhap.html">Đăng Nhập</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="room-section">
+            <h2 class="section-title">Danh Sách Phòng</h2>
+            
+            <div class="room-filters">
+                <button class="filter-btn active" onclick="filterRooms('all')">Tất cả</button>
+                <button class="filter-btn" onclick="filterRooms('single')">Phòng Đơn</button>
+                <button class="filter-btn" onclick="filterRooms('double')">Phòng Đôi</button>
+                <button class="filter-btn" onclick="filterRooms('family')">Phòng Gia Đình</button>
+            </div>
+
+            <div class="room-grid" id="roomList">
+                <!-- Phòng sẽ được thêm vào đây bằng JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/DatPhong.js"></script>
+</body>
+</html>
