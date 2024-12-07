@@ -1,0 +1,464 @@
+/* Reset và Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: #f8f9fa;
+    color: #2d3436;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 120px auto 50px;
+    padding: 0 20px;
+}
+
+/* Hero Section */
+.hero-section {
+    height: 500px;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../images/pexels-pixabay-260922.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    margin: -100px -30px 50px;
+    padding: 0 20px;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    opacity: 0.9;
+}
+
+/* Story Section */
+.story-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+    margin-bottom: 80px;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.story-content {
+    padding: 50px;
+}
+
+.story-content h2 {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.story-content h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    height: 3px;
+    background: #e74c3c;
+}
+
+.story-content p {
+    color: #636e72;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.story-image {
+    height: 100%;
+}
+
+.story-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Values Section */
+.values-section {
+    padding: 50px;
+    background: white;
+    border-radius: 20px;
+    margin-bottom: 80px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.values-section h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 50px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.values-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: #e74c3c;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.value-item {
+    text-align: center;
+    padding: 30px;
+    background: #f8f9fa;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.value-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.value-item i {
+    font-size: 40px;
+    color: #e74c3c;
+    margin-bottom: 20px;
+}
+
+/* Team Section */
+.team-section {
+    padding: 50px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.team-member {
+    text-align: center;
+}
+
+.team-member img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    object-fit: cover;
+}
+
+/* Header Styles */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 40px;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.logo img {
+    height: 50px;
+    width: auto;
+}
+
+.menu {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    font-size: 1.1em;
+    transition: color 0.3s ease;
+    padding: 8px 15px;
+    border-radius: 20px;
+}
+
+.menu li a:hover {
+    color: #e74c3c;
+}
+
+.menu li a.active {
+    background: #e74c3c;
+    color: #fff;
+}
+
+/* Content Styles */
+.container {
+    max-width: 1200px;
+    margin: 150px auto 50px;
+    padding: 0 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 40px;
+    font-size: 2.5em;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: #e74c3c;
+}
+
+.about-content {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.about-image {
+    flex: 1;
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Timeline Styles */
+.timeline {
+    position: relative;
+    margin: 50px 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: calc(100% - 100px);
+    background: #e74c3c;
+    top: 50px;
+}
+
+.timeline-item {
+    margin-bottom: 80px;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.timeline-item:nth-child(odd) {
+    flex-direction: row-reverse;
+}
+
+.timeline-content {
+    width: calc(50% - 50px);
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.timeline-dot {
+    width: 25px;
+    height: 25px;
+    background: #e74c3c;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid #fff;
+    box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.2);
+}
+
+.timeline-date {
+    position: absolute;
+    top: -40px;
+    background: linear-gradient(45deg, #e74c3c, #c0392b);
+    color: #fff;
+    padding: 12px 35px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1.2em;
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+    z-index: 2;
+    letter-spacing: 1px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.timeline-date:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
+}
+
+.timeline-item:nth-child(odd) .timeline-date {
+    right: 0;
+}
+
+.timeline-item:nth-child(even) .timeline-date {
+    left: 0;
+}
+
+.timeline-content h3 {
+    color: #2c3e50;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+}
+
+.timeline-content img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 15px 0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.timeline-content:hover img {
+    transform: scale(1.03);
+}
+
+.timeline-content p {
+    color: #666;
+    line-height: 1.8;
+    font-size: 1.1em;
+    text-align: justify;
+}
+
+/* Vision Mission Styles */
+.vision-mission {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 80px;
+}
+
+.vision, .mission {
+    background: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.vision h2, .mission h2 {
+    color: #2c3e50;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vision i, .mission i {
+    color: #e74c3c;
+    margin-right: 15px;
+    font-size: 1.2em;
+}
+
+.vision p, .mission p {
+    color: #666;
+    line-height: 1.8;
+    font-size: 1.1em;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        margin-top: 100px;
+    }
+
+    .timeline::before {
+        left: 30px;
+    }
+
+    .timeline-item {
+        flex-direction: row !important;
+        justify-content: flex-start !important;
+    }
+
+    .timeline-content {
+        width: calc(100% - 70px);
+        margin-left: 70px;
+    }
+
+    .timeline-dot {
+        left: 30px;
+    }
+
+    .timeline-date {
+        left: 70px !important;
+        right: auto !important;
+        padding: 10px 25px;
+        font-size: 1.1em;
+        top: -45px;
+    }
+
+    .timeline-dot {
+        left: 30px;
+        width: 25px;
+        height: 25px;
+    }
+
+    .timeline-content img {
+        height: 200px;
+    }
+
+    .vision-mission {
+        grid-template-columns: 1fr;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .timeline-content h3 {
+        font-size: 1.5em;
+    }
+
+    .vision h2, .mission h2 {
+        font-size: 1.5em;
+    }
+}

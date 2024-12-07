@@ -1,0 +1,224 @@
+/* Reset và Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+/* Menu Hero Section */
+.menu-hero {
+    text-align: center;
+    padding: 120px 0;
+    background-image: url('/images/backgroud-thucdon.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #eb4b0b;
+    margin-bottom: 50px;
+}
+
+.menu-hero h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.menu-hero p {
+    font-size: 1.8rem;
+    opacity: 0.9;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Menu Categories */
+.menu-categories {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    margin-bottom: 50px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.category-tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.filter-btn {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 30px;
+    background: #f8f9fa;
+    color: #333;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.filter-btn:hover {
+    background: #eb4b0b;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background: #eb4b0b;
+    color: white;
+    box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+}
+
+/* Menu Items Grid */
+.items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 35px;
+    padding: 20px;
+}
+
+.menu-item {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    transition: all 0.4s ease;
+}
+
+.menu-item:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.item-image {
+    height: 280px;
+    overflow: hidden;
+    position: relative;
+}
+
+.item-image::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to top, rgba(0,0,0,0.3), transparent);
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.menu-item:hover .item-image img {
+    transform: scale(1.15);
+}
+
+.item-info {
+    padding: 30px;
+}
+
+.item-info h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.description {
+    color: #666;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.price {
+    color: #eb4b0b;
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.price::before {
+    content: '₫';
+    font-size: 1.2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .items-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 20px;
+    }
+
+    .menu-hero {
+        padding: 80px 0;
+    }
+
+    .menu-hero h1 {
+        font-size: 2.8rem;
+    }
+
+    .menu-hero p {
+        font-size: 1.4rem;
+    }
+
+    .filter-btn {
+        padding: 12px 25px;
+        font-size: 14px;
+    }
+
+    .items-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 25px;
+        padding: 10px;
+    }
+
+    .item-image {
+        height: 220px;
+    }
+
+    .item-info {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .menu-hero p {
+        font-size: 1.1rem;
+    }
+
+    .filter-btn {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+}
