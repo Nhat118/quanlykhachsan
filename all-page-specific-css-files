@@ -1,0 +1,5 @@
+/* Điều chỉnh margin-top cho container chính */
+.container {
+    margin-top: 100px;
+    /* giữ nguyên các style khác của container */
+} 

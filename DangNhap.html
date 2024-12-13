@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/download.png">
+    <link rel="stylesheet" href="styles/header.css">
+    <title>Đăng nhập - Luxury Hotel</title>
+    <link rel="stylesheet" href="styles/DangNhap.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header">
+            <div class="logo">
+                <a href="TrangChu.html">
+                    <img src="images/logo.png" alt="Logo Hotel">
+                </a>
+                <div class="hotel-name">LUXURY HOTEL</div>
+            </div>
+            <nav>
+                <ul class="menu">
+                    <li><a href="TrangChu.html">Trang Chủ</a></li>
+                    <li><a href="DatPhong.html">Đặt Phòng</a></li>
+                    <li><a href="DichVu.html">Dịch Vụ</a></li>
+                    <li><a href="ThanhToan.html">Thanh Toán</a></li>
+                    <li><a href="PhanHoi.html">Phản Hồi</a></li>
+                    <li><a href="DangNhap.html" class="active">Đăng Nhập</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="login-box">
+            <a href="TrangChu.html" class="close-btn" title="Quay về trang chủ">&times;</a>
+            <img src="images/logo.png" alt="Hotel Logo" class="hotel-logo">
+            <h2>Đăng Nhập</h2>
+            <form id="loginForm" onsubmit="login(event)">
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password" required>
+                </div>
+                <div class="remember-forgot">
+                    <label>
+                        <input type="checkbox"> Ghi nhớ đăng nhập
+                    </label>
+                    <a href="#" class="forgot-password">Quên mật khẩu?</a>
+                </div>
+                <button type="submit" class="btn-login">Đăng nhập</button>
+                <div id="message" class="message"></div>
+            </form>
+            <div class="login-footer">
+                <p>Chưa có tài khoản? <a href="DangKy.html">Đăng ký ngay</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            localStorage.setItem('isLoggedIn', 'true');
+            const pendingRoom = localStorage.getItem('pendingBookingRoom');
+            if (pendingRoom) {
+                localStorage.removeItem('pendingBookingRoom');
+                window.location.href = 'DatPhong.html';
+            } else {
+                window.location.href = 'TrangChu.html';
+            }
+        });
+    </script>
+</body>
+</html>

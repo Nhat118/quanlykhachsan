@@ -1,0 +1,150 @@
+/* Reset và Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    line-height: 1.6;
+    background: #f8f9fa;
+    color: #2c3e50;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 100px auto 50px;
+    padding: 0 20px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 50px;
+    position: relative;
+    padding-bottom: 20px;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: #e74c3c;
+}
+
+.feedback-list {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 30px;
+}
+
+.feedback-item {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.feedback-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-info i.fa-user-circle {
+    font-size: 2.5em;
+    color: #e74c3c;
+    margin-right: 15px;
+}
+
+.info h3 {
+    font-size: 1.2em;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.contact {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.status {
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.status.pending {
+    background-color: #ffebee;
+    color: #d32f2f;
+}
+
+.status.processing {
+    background-color: #fff3e0;
+    color: #f57c00;
+}
+
+.status.resolved {
+    background-color: #e8f5e9;
+    color: #388e3c;
+}
+
+.booking-info, .feedback-content {
+    margin-bottom: 20px;
+}
+
+.booking-info h4, .feedback-content h4 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.booking-info p, .feedback-content p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 5px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        margin: 80px auto 30px;
+        padding: 0 15px;
+    }
+
+    .feedback-item {
+        padding: 20px;
+    }
+
+    .feedback-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .status {
+        align-self: flex-start;
+    }
+
+    .contact {
+        display: block;
+        margin-top: 5px;
+    }
+}
+
+
+

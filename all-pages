@@ -1,0 +1,19 @@
+<header>
+    <div class="header">
+        <div class="logo">
+            <a href="TrangChu.html">
+                <img src="images/logo.png" alt="Logo Hotel">
+            </a>
+        </div>
+        <nav>
+            <ul class="menu">
+                <li><a href="TrangChu.html">Trang Chủ</a></li>
+                <li><a href="DatPhong.html">Đặt Phòng</a></li>
+                <li><a href="DichVu.html">Dịch Vụ</a></li>
+                <li><a href="VeChungToi.html">Về Chúng Tôi</a></li>
+                <li><a href="LienHe.html">Liên Hệ</a></li>
+                <li><a href="DangNhap.html">Đăng Nhập</a></li>
+            </ul>
+        </nav>
+    </div>
+</header> 

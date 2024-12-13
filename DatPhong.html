@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt Phòng - Luxury Hotel</title>
+    <!-- Font Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Header CSS riêng -->
+    <link rel="stylesheet" href="styles/header.css">
+    <!-- CSS Đặt phòng -->
+    <link rel="stylesheet" href="styles/DatPhong.css">
+</head>
+<body>
+    <header>
+        <div class="header">
+            <div class="logo">
+                <a href="TrangChu.html">
+                    <img src="images/logo.png" alt="Logo Hotel">
+                </a>
+                <div class="hotel-name">LUXURY HOTEL</div>
+            </div>
+            <nav>
+                <ul class="menu">
+                    <li><a href="TrangChu.html">Trang Chủ</a></li>
+                    <li><a href="DatPhong.html"class="active">Đặt Phòng</a></li>
+                    <li><a href="DichVu.html">Dịch Vụ</a></li>
+                    <li><a href="ThanhToan.html">Thanh Toán</a></li>
+                    <li><a href="PhanHoi.html">Phản Hồi</a></li>
+                    <li><a href="DangNhap.html">Đăng Nhập</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- Main content -->
+    <div class="container">
+        <h1 class="section-title">Đặt Phòng</h1>
+        
+        <div class="room-filters">
+            <button class="filter-btn active" onclick="filterRooms('all')">Tất cả</button>
+            <button class="filter-btn" onclick="filterRooms('single')">Phòng đơn</button>
+            <button class="filter-btn" onclick="filterRooms('double')">Phòng đôi</button>
+            <button class="filter-btn" onclick="filterRooms('family')">Phòng gia đình</button>
+        </div>
+
+        <div id="roomList" class="room-grid">
+            <!-- Rooms will be inserted here by JavaScript -->
+        </div>
+    </div>
+
+    <script src="scripts/DatPhong.js"></script>
+</body>
+</html>
