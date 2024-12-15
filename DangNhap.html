@@ -34,45 +34,31 @@
 
     <div class="container">
         <div class="login-box">
-            <a href="TrangChu.html" class="close-btn" title="Quay về trang chủ">&times;</a>
+            <h2>LUXURY HOTEL</h2>
             <img src="images/logo.png" alt="Hotel Logo" class="hotel-logo">
-            <h2>Đăng Nhập</h2>
-            <form id="loginForm" onsubmit="login(event)">
+            <form onsubmit="return validateLoginForm()">
                 <div class="input-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" required>
+                    <label for="username">Tên đăng nhập</label>
+                    <input type="text" id="username" name="username" required>
                 </div>
                 <div class="input-group">
                     <label for="password">Mật khẩu</label>
-                    <input type="password" id="password" required>
+                    <div class="password-container">
+                        <input type="password" id="password" name="password" required>
+                        <i class="fas fa-eye" id="togglePassword"></i>
+                    </div>
                 </div>
-                <div class="remember-forgot">
-                    <label>
-                        <input type="checkbox"> Ghi nhớ đăng nhập
+                <div class="remember-container">
+                    <label class="remember-label">
+                        <input type="checkbox" id="rememberMe">
+                        <span>Ghi nhớ đăng nhập</span>
                     </label>
-                    <a href="#" class="forgot-password">Quên mật khẩu?</a>
                 </div>
                 <button type="submit" class="btn-login">Đăng nhập</button>
-                <div id="message" class="message"></div>
             </form>
-            <div class="login-footer">
-                <p>Chưa có tài khoản? <a href="DangKy.html">Đăng ký ngay</a></p>
-            </div>
         </div>
     </div>
 
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            localStorage.setItem('isLoggedIn', 'true');
-            const pendingRoom = localStorage.getItem('pendingBookingRoom');
-            if (pendingRoom) {
-                localStorage.removeItem('pendingBookingRoom');
-                window.location.href = 'DatPhong.html';
-            } else {
-                window.location.href = 'TrangChu.html';
-            }
-        });
-    </script>
+    <script src="scripts/DangNhap.js"></script>
 </body>
 </html>

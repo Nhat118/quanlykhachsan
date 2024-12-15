@@ -34,10 +34,15 @@
             </nav>
         </div>
     </header>
-
+    <script src="scripts/DangNhap.js"></script>
 
     <!-- Main content -->
     <div class="container">
+        <div class="admin-controls" id="adminControls" style="display: none;">
+            <button class="admin-btn" onclick="openAddRoomModal()">
+                <i class="fas fa-plus"></i> Thêm Phòng
+            </button>
+        </div>
         <h1 class="section-title">Đặt Phòng</h1>
         
         <div class="room-filters">
@@ -49,6 +54,46 @@
 
         <div id="roomList" class="room-grid">
             <!-- Rooms will be inserted here by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Modal Thêm/Sửa Phòng -->
+    <div id="roomModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle">Thêm Phòng Mới</h2>
+            <form id="roomForm">
+                <input type="hidden" id="roomId">
+                <div class="form-group">
+                    <label for="roomName">Tên phòng:</label>
+                    <input type="text" id="roomName" required>
+                </div>
+                <div class="form-group">
+                    <label for="roomType">Loại phòng:</label>
+                    <select id="roomType" required>
+                        <option value="single">Phòng đơn</option>
+                        <option value="double">Phòng đôi</option>
+                        <option value="family">Phòng gia đình</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="roomPrice">Giá phòng:</label>
+                    <input type="number" id="roomPrice" required>
+                </div>
+                <div class="form-group">
+                    <label for="roomDescription">Mô tả:</label>
+                    <textarea id="roomDescription" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="roomAmenities">Tiện nghi (phân cách bằng dấu phẩy):</label>
+                    <input type="text" id="roomAmenities" required>
+                </div>
+                <div class="form-group">
+                    <label for="roomImage">Hình ảnh:</label>
+                    <input type="file" id="roomImage" accept="image/*">
+                </div>
+                <button type="submit" class="admin-btn">Lưu</button>
+            </form>
         </div>
     </div>
 
