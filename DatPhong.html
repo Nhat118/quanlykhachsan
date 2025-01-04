@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="styles/header.css">
     <!-- CSS Đặt phòng -->
     <link rel="stylesheet" href="styles/DatPhong.css">
+    <script src="scripts/DatPhong.js" defer></script>
 </head>
 <body>
     <header>
@@ -97,6 +98,49 @@
         </div>
     </div>
 
-    <script src="scripts/DatPhong.js"></script>
+    <!-- Thêm Modal Đặt Phòng -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeBookingModal()">&times;</span>
+            <h2>Thông Tin Đặt Phòng</h2>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label for="customerName">Họ và tên:</label>
+                    <input type="text" id="customerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="birthDate">Ngày sinh:</label>
+                    <input type="date" id="birthDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Số điện thoại:</label>
+                    <input type="tel" id="phoneNumber" pattern="[0-9]{10}" required>
+                </div>
+                <div class="form-group">
+                    <label for="idCard">Số CCCD:</label>
+                    <input type="text" id="idCard" pattern="[0-9]{12}" required>
+                </div>
+                <div class="form-group">
+                    <label for="hometown">Quê quán:</label>
+                    <input type="text" id="hometown" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Địa chỉ hiện tại:</label>
+                    <input type="text" id="address" required>
+                </div>
+                <div class="form-group">
+                    <label for="checkIn">Ngày nhận phòng:</label>
+                    <input type="date" id="checkIn" required>
+                </div>
+                <div class="form-group">
+                    <label for="checkOut">Ngày trả phòng:</label>
+                    <input type="date" id="checkOut" required>
+                </div>
+                <button type="submit" class="booking-btn">Xác nhận đặt phòng</button>
+            </form>
+        </div>
+    </div>
+
+    
 </body>
 </html>
