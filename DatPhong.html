@@ -3,16 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/download.png">
     <title>Đặt Phòng - Luxury Hotel</title>
-    <!-- Font Montserrat -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Header CSS riêng -->
     <link rel="stylesheet" href="styles/header.css">
-    <!-- CSS Đặt phòng -->
     <link rel="stylesheet" href="styles/DatPhong.css">
-    <script src="scripts/DatPhong.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header>
@@ -26,121 +22,165 @@
             <nav>
                 <ul class="menu">
                     <li><a href="TrangChu.html">Trang Chủ</a></li>
-                    <li><a href="DatPhong.html"class="active">Đặt Phòng</a></li>
+                    <li><a href="DatPhong.html" class="active">Đặt Phòng</a></li>
                     <li><a href="DichVu.html">Dịch Vụ</a></li>
                     <li><a href="ThanhToan.html">Thanh Toán</a></li>
                     <li><a href="PhanHoi.html">Phản Hồi</a></li>
-                    <li><a href="DangNhap.html">Đăng Nhập</a></li>
+                    <li id="authLink"><a href="DangNhap.html">Đăng Nhập</a></li>
                 </ul>
             </nav>
         </div>
     </header>
-    <script src="scripts/DangNhap.js"></script>
 
-    <!-- Main content -->
     <div class="container">
-        <div class="admin-controls" id="adminControls" style="display: none;">
-            <button class="admin-btn" onclick="openAddRoomModal()">
-                <i class="fas fa-plus"></i> Thêm Phòng
-            </button>
-        </div>
-        <h1 class="section-title">Đặt Phòng</h1>
-        
-        <div class="room-filters">
-            <button class="filter-btn active" onclick="filterRooms('all')">Tất cả</button>
-            <button class="filter-btn" onclick="filterRooms('single')">Phòng đơn</button>
-            <button class="filter-btn" onclick="filterRooms('double')">Phòng đôi</button>
-            <button class="filter-btn" onclick="filterRooms('family')">Phòng gia đình</button>
-        </div>
+        <div id="bookingSection">
+            <h2>QUẢN LÝ PHÒNG</h2>
 
-        <div id="roomList" class="room-grid">
-            <!-- Rooms will be inserted here by JavaScript -->
-        </div>
-    </div>
+            <!-- Tìm kiếm phòng -->
+            <h3>Tìm kiếm phòng</h3>
+            <div class="form-group">
+                <select id="roomType" required>
+                    <option value="">Chọn loại phòng</option>
+                    <option value="single">Phòng đơn</option>
+                    <option value="double">Phòng đôi</option>
+                    <option value="family">Phòng gia đình</option>
+                </select>
+                <input type="number" id="roomPrice" placeholder="Giá tối đa" required oninput="this.value = formatPrice(this.value)">
+                <select id="roomStatus">
+                    <option value="">Tất cả</option>
+                    <option value="available">Còn trống</option>
+                    <option value="occupied">Đã đặt</option>
+                </select>
+                <button id="searchButton">Tìm kiếm</button>
+            </div>
 
-    <!-- Modal Thêm/Sửa Phòng -->
-    <div id="roomModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2 id="modalTitle">Thêm Phòng Mới</h2>
-            <form id="roomForm">
-                <input type="hidden" id="roomId">
-                <div class="form-group">
-                    <label for="roomName">Tên phòng:</label>
-                    <input type="text" id="roomName" required>
-                </div>
-                <div class="form-group">
-                    <label for="roomType">Loại phòng:</label>
-                    <select id="roomType" required>
-                        <option value="single">Phòng đơn</option>
-                        <option value="double">Phòng đôi</option>
-                        <option value="family">Phòng gia đình</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="roomPrice">Giá phòng:</label>
-                    <input type="number" id="roomPrice" required>
-                </div>
-                <div class="form-group">
-                    <label for="roomDescription">Mô tả:</label>
-                    <textarea id="roomDescription" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="roomAmenities">Tiện nghi (phân cách bằng dấu phẩy):</label>
-                    <input type="text" id="roomAmenities" required>
-                </div>
-                <div class="form-group">
-                    <label for="roomImage">Hình ảnh:</label>
-                    <input type="file" id="roomImage" accept="image/*">
-                </div>
-                <button type="submit" class="admin-btn">Lưu</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Thêm Modal Đặt Phòng -->
-    <div id="bookingModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeBookingModal()">&times;</span>
-            <h2>Thông Tin Đặt Phòng</h2>
-            <form id="bookingForm">
-                <div class="form-group">
-                    <label for="customerName">Họ và tên:</label>
-                    <input type="text" id="customerName" required>
-                </div>
-                <div class="form-group">
-                    <label for="birthDate">Ngày sinh:</label>
-                    <input type="date" id="birthDate" required>
-                </div>
-                <div class="form-group">
-                    <label for="phoneNumber">Số điện thoại:</label>
-                    <input type="tel" id="phoneNumber" pattern="[0-9]{10}" required>
-                </div>
-                <div class="form-group">
-                    <label for="idCard">Số CCCD:</label>
-                    <input type="text" id="idCard" pattern="[0-9]{12}" required>
-                </div>
-                <div class="form-group">
-                    <label for="hometown">Quê quán:</label>
-                    <input type="text" id="hometown" required>
-                </div>
-                <div class="form-group">
-                    <label for="address">Địa chỉ hiện tại:</label>
-                    <input type="text" id="address" required>
-                </div>
-                <div class="form-group">
-                    <label for="checkIn">Ngày nhận phòng:</label>
-                    <input type="date" id="checkIn" required>
-                </div>
-                <div class="form-group">
-                    <label for="checkOut">Ngày trả phòng:</label>
-                    <input type="date" id="checkOut" required>
-                </div>
-                <button type="submit" class="booking-btn">Xác nhận đặt phòng</button>
-            </form>
-        </div>
-    </div>
-
+            <!-- Thêm phòng -->
+            <h3>Thêm phòng mới</h3>
+            <button id="showAddRoomForm">Thêm phòng</button>
+            <!-- Form thêm phòng -->
+<div id="addRoomForm" class="form-container">
+    <h2>Thêm Phòng Mới</h2>
+    <label for="newRoomId">ID Phòng:</label>
+    <input type="text" id="newRoomId" placeholder="Nhập ID phòng mới" required>
     
+    <label for="newRoomType">Loại Phòng:</label>
+    <select id="newRoomType" required>
+        <option value="">Chọn loại phòng</option>
+        <option value="Phòng Đơn">Phòng Đơn</option>
+        <option value="Phòng Đôi">Phòng Đôi</option>
+        <option value="Phòng Gia Đình">Phòng Gia Đình</option>
+    </select>
+    
+    <label for="newRoomPrice">Giá Phòng:</label>
+    <input type="number" id="newRoomPrice" placeholder="Nhập giá phòng" required>
+    
+    <label for="newRoomDescription">Mô Tả Phòng:</label>
+    <textarea id="newRoomDescription" placeholder="Nhập mô tả phòng" required></textarea>
+    
+    <label for="newRoomAmenities">Tiện Nghi:</label>
+    <input type="text" id="newRoomAmenities" placeholder="Nhập tiện nghi (cách nhau bằng dấu phẩy)" required>
+    
+    <label for="newRoomImage">Hình Ảnh:</label>
+    <input type="file" id="newRoomImage" accept="image/*" required>
+    
+    <button id="addRoomButton">Thêm Phòng</button>
+</div>
+
+            <!-- Xóa phòng -->
+            <h3>Xóa phòng</h3>
+            <button id="showDeleteRoomForm">Xóa phòng</button>
+            <div id="deleteRoomForm" style="display: none;">
+                <input type="text" id="deleteRoomId" placeholder="Số phòng cần xóa" required>
+                <button onclick="deleteRoom(document.getElementById('deleteRoomId').value)">Xóa phòng</button>
+            </div>
+
+            <!-- Sửa phòng -->
+            <h3>Sửa phòng</h3>
+            <button id="showEditRoomForm">Sửa phòng</button>
+            <div id="editRoomForm" class="form-container" style="display: none;">
+                <h2>Sửa Thông Tin Phòng</h2>
+                <label for="editRoomId">ID Phòng:</label>
+                <input type="text" id="editRoomId" placeholder="Nhập ID phòng" required>
+                
+                <label for="editRoomType">Loại Phòng:</label>
+                <select id="editRoomType" required>
+                    <option value="Phòng Đơn">Phòng Đơn</option>
+                    <option value="Phòng Đôi">Phòng Đôi</option>
+                    <option value="Phòng Gia Đình">Phòng Gia Đình</option>
+                </select>
+                
+                <label for="editRoomPrice">Giá Phòng:</label>
+                <input type="number" id="editRoomPrice" placeholder="Nhập giá phòng" required>
+                
+                <label for="editRoomDescription">Mô Tả Phòng:</label>
+                <textarea id="editRoomDescription" placeholder="Nhập mô tả phòng" required></textarea>
+                
+                <label for="editRoomAmenities">Tiện Nghi:</label>
+                <input type="text" id="editRoomAmenities" placeholder="Nhập tiện nghi (cách nhau bằng dấu phẩy)" required>
+                
+                <button id="editRoomButton">Cập Nhật Phòng</button>
+            </div>
+
+            <!-- Chuyển phòng -->
+            <h3>Chuyển phòng</h3>
+            <button id="showTransferRoomForm">Chuyển phòng</button>
+            <div id="transferRoomForm" style="display: none;">
+                <input type="text" id="transferRoomId" placeholder="Số phòng hiện tại" required>
+                <input type="text" id="newRoomId" placeholder="Số phòng mới" required>
+                <button id="transferRoomButton">Chuyển phòng</button>
+            </div>
+
+            <h2>Danh sách phòng</h2>
+            <div id="roomList">
+                <!-- Ví dụ về một phòng -->
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="images/room1.jpg" alt="Phòng 1">
+                        <div class="status-badge available">Còn trống</div>
+                    </div>
+                    <div class="room-info">
+                        <h3>Phòng 1</h3>
+                        <p class="description">Mô tả phòng 1.</p>
+                        <p class="price">1,000,000 VNĐ/đêm</p>
+                        <button class="book-btn" onclick="bookRoom('${room.id}')" ${room.status === 'occupied' ? 'disabled' : ''}>
+                            <i class="fas fa-calendar-check"></i>
+                            ${room.status === 'available' ? 'Đặt phòng' : 'Đã đặt'}
+                        </button>
+                    </div>
+                </div>
+                <!-- Thêm các phòng khác tương tự -->
+            </div>
+
+            <!-- Modal cho form đặt phòng -->
+            <div id="bookingModal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <h3>Thông tin khách hàng</h3>
+                    <form id="bookingForm">
+                        <label for="customerName">Họ tên:</label>
+                        <input type="text" id="customerName" required>
+                        <label for="customerGender">Giới tính:</label>
+                        <select id="customerGender" required>
+                            <option value="male">Nam</option>
+                            <option value="female">Nữ</option>
+                        </select>
+                        <label for="customerBirthYear">Ngày sinh:</label>
+                        <input type="date" id="customerBirthYear" required>
+                        <label for="customerPhone">Điện thoại:</label>
+                        <input type="tel" id="customerPhone" required>
+                        <label for="customerNationality">Quốc tịch:</label>
+                        <input type="text" id="customerNationality" required>
+                        <label for="customerIdCard">CMND:</label>
+                        <input type="text" id="customerIdCard" required>
+                        <label for="rentalPeriod">Thời gian thuê phòng:</label>
+                        <input type="date" id="rentalPeriod" required>
+                        <button type="submit">Xác nhận đặt phòng</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/DatPhong.js"></script>
 </body>
 </html>
